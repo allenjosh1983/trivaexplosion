@@ -71,58 +71,58 @@ function QuestionForm() {
     };
 
 
-const handleSubmit = async (event) => {
-    event.preventDefault();
-    const questionData = {
-        user: { username },
-        text: questionText,
-        answers: answers.map((answer, index) => ({ ...answer, isCorrect: index === correctAnswerIndex })),
-    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const questionData = {
+            user: { username },
+            text: questionText,
+            answers: answers.map((answer, index) => ({ ...answer, isCorrect: index === correctAnswerIndex })),
+        };
 
-    const method = editMode ? 'PUT' : 'POST';
-    const questionUrl = editMode ? `http://localhost:3306/question/${editQuestionId}` : 'http://localhost:3306/question';
+        const method = editMode ? 'PUT' : 'POST';
+        const questionUrl = editMode ? `http://localhost:3306/question/${editQuestionId}` : 'http://localhost:3306/question';
 
-    try {
-        const response = await fetch(questionUrl, {
-            method: method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(questionData),
-        });
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-        const savedQuestion = await response.json();
-
-        // Check if quizId is defined and not in edit mode
-        if (!editMode && quizId && quizId !== 'undefined') {
-            const addQuestionToQuizResponse = await fetch(`http://localhost:3306/quiz/addQuestion/${quizId}`, {
-                method: 'POST',
+        try {
+            const response = await fetch(questionUrl, {
+                method: method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ questionId: savedQuestion.id }),
+                body: JSON.stringify(questionData),
             });
-            if (!addQuestionToQuizResponse.ok) throw new Error(`HTTP error! Status: ${addQuestionToQuizResponse.status}`);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const savedQuestion = await response.json();
+
+            // Check if quizId is defined and not in edit mode
+            if (!editMode && quizId && quizId !== 'undefined') {
+                const addQuestionToQuizResponse = await fetch(`http://localhost:3306/quiz/addQuestion/${quizId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ questionId: savedQuestion.id }),
+                });
+                if (!addQuestionToQuizResponse.ok) throw new Error(`HTTP error! Status: ${addQuestionToQuizResponse.status}`);
+            }
+
+            alert('Question saved successfully!');
+
+            // Reset form
+            setQuestionText('');
+            setAnswers(new Array(4).fill({ text: '', isCorrect: false }));
+            setCorrectAnswerIndex(-1);
+            setEditMode(false);
+            setEditQuestionId(null);
+
+            // Only navigate if quizId is valid
+            if (quizId && quizId !== 'undefined') {
+                navigate(`/question-form/${quizId}`);
+            } else {
+                navigate(`/question-form`);
+            }
+
+        } catch (error) {
+            alert('Error saving question.');
+            console.error('There was an error:', error);
         }
-
-        alert('Question saved successfully!');
-
-        // Reset form
-        setQuestionText('');
-        setAnswers(new Array(4).fill({ text: '', isCorrect: false }));
-        setCorrectAnswerIndex(-1);
-        setEditMode(false);
-        setEditQuestionId(null);
-
-        // Only navigate if quizId is valid
-        if (quizId && quizId !== 'undefined') {
-            navigate(`/question-form/${quizId}`);
-        } else {
-            navigate(`/question-form`);
-        }
-
-    } catch (error) {
-        alert('Error saving question.');
-        console.error('There was an error:', error);
-    }
-};
+    };
 
     const handleSearch = async () => {
         try {
@@ -178,11 +178,11 @@ const handleSubmit = async (event) => {
 
     const handleAddToQuiz = async (questionId) => {
         try {
-             console.log(`quizId: ${quizId}`);
-             console.log(`questionId: ${questionId}`);
-             const requestBody = JSON.stringify({ questionId: questionId }); // Construct the request body as a JSON object
-             console.log(`quizId: ${quizId}`);
-             const response = await fetch(`http://localhost:3306/quiz/addQuestion/${quizId}`, {
+            console.log(`quizId: ${quizId}`);
+            console.log(`questionId: ${questionId}`);
+            const requestBody = JSON.stringify({ questionId: questionId }); // Construct the request body as a JSON object
+            console.log(`quizId: ${quizId}`);
+            const response = await fetch(`http://localhost:3306/quiz/addQuestion/${quizId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: requestBody, // Provide the request body here
@@ -224,7 +224,7 @@ const handleSubmit = async (event) => {
                         </label>
                     </div>
                 ))}
-                <button type="submit">Save Question</button>
+                <button type="submit" className="btn btn-primary">Save Question</button>
             </form>
 
             <div>
@@ -235,7 +235,7 @@ const handleSubmit = async (event) => {
                     onChange={(e) => setSearchUsername(e.target.value)}
                     placeholder="Username"
                 />
-                <button type="button" onClick={handleSearch}>Search</button>
+                <button type="button" onClick={handleSearch} className="btn btn-primary">Search</button>
             </div>
 
             <div>
@@ -252,7 +252,7 @@ const handleSubmit = async (event) => {
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder="Keyword"
                 />
-                <button type="button" onClick={handleKeywordSearch}>Search Keyword</button>
+                <button type="button" onClick={handleKeywordSearch} className="btn btn-primary">Search Keyword</button>
             </div>
 
             <div>
@@ -274,10 +274,10 @@ const handleSubmit = async (event) => {
                             </ul>
                         </div>
                         <div className="question-actions">
-                            <button onClick={() => handleEdit(question)} className="question-button edit-button">Edit</button>
-                            <button onClick={() => handleDelete(question.id)} className="question-button delete-button">Delete</button>
+                            <button onClick={() => handleEdit(question)} className="btn btn-primary edit-button">Edit</button>
+                            <button onClick={() => handleDelete(question.id)} className="btn btn-primary delete-button">Delete</button>
                             {quizId && (
-                                <button onClick={() => handleAddToQuiz(question.id)} className="question-button add-button">Add to Quiz</button>
+                                <button onClick={() => handleAddToQuiz(question.id)} className="btn btn-primary add-button">Add to Quiz</button>
                             )}
                         </div>
                     </div>

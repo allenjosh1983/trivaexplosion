@@ -98,7 +98,7 @@ function RegisterPage() {
               <span style={{ color: 'red' }}>{emailError}</span>
             </label>
             <br />
-            <button type="submit" className="custom-button">
+            <button type="submit" className="btn btn-primary custom-button">
               Register
             </button>
           </form>

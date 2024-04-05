@@ -33,7 +33,7 @@ function LoginPage() {
                 <input type="password" value={password} onChange={handlePasswordChange} />
               </label>
               <br />
-              <button type="button" className="custom-button" onClick={handleLogin}>
+              <button type="button" className="btn btn-primary custom-button" onClick={handleLogin}>
                 Login
               </button>
             </form>
