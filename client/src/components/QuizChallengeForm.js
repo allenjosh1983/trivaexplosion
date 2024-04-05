@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 function QuizChallengeForm() {
     const [email, setEmail] = useState('');
@@ -70,13 +72,12 @@ function QuizChallengeForm() {
               </label>
             </div>
             <br />
-            <button type="button" onClick={handleSendQuiz} className="email-button">
+            <button type="button" onClick={handleSendQuiz} className="btn btn-primary">
               Send Quiz
             </button>
           </form>
           {quizSent && <p style={{ color: 'green' }}>Quiz sent!</p>}
         </div>
-
     );
 }
 

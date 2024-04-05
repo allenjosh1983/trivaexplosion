@@ -1,5 +1,7 @@
 // LeaderboardPage.js
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 function LeaderboardPage() {
   const [userData, setUserData] = useState([]);

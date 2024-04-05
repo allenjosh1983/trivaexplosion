@@ -35,23 +35,24 @@ input,
 select,
 button {
   width: 100%;
-  padding: 10px;
+  padding: 8px 16px; /* Adjusted padding for all buttons */
   margin-bottom: 10px;
   box-sizing: border-box;
 }
 
 button {
-  background-color: #007bff;
+  background-color: blue; /* Blue color for all buttons */
   color: white;
   border: none;
-  padding: 10px 20px;
-  cursor: pointer;
   border-radius: 5px;
+  font-size: 14px; /* Adjusted font size for all buttons */
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker blue on hover */
 }
+
 .app-container {
   font-family: 'Arial', sans-serif;
 }
@@ -223,3 +224,10 @@ input {
   margin-top: 10px;
   align-self: center;
 }
+
+/* Center text input fields */
+input[type="text"],
+input[type="password"],
+textarea {}
+  width: 100%; /* Ensure input fields take full width */
+  padding: 8px; /* Adjusted*/

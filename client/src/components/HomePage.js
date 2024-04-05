@@ -146,7 +146,7 @@ function HomePage() {
                                             </div>
                                         )}
                                         <div style={{marginTop: '20px'}}>
-                                            <Button variant="success" onClick={handleGenerateQuiz}>Trivia
+                                            <Button variant="primary" onClick={handleGenerateQuiz}>Trivia
                                                 Explosion!</Button>
                                         </div>
                                     </div>

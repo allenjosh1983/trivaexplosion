@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import {Table, Button, Modal, FormControl, InputGroup, Card} from 'react-bootstrap';
+import { Table, Button, Modal, FormControl, InputGroup, Card } from 'react-bootstrap';
 import axios from 'axios';
-import { Link, useParams, useNavigate} from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import CreateQuizForm from './CreateQuizForm';
-
 
 const QuizPage = () => {
     const [quizzes, setQuizzes] = useState([]);
-    const [newQuiz, setNewQuiz] = useState({title: ''});
+    const [newQuiz, setNewQuiz] = useState({ title: '' });
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false); // Corrected true?
     const [editedQuiz, setEditedQuiz] = useState({});
-    const {quizId} = useParams();
+    const { quizId } = useParams();
     const [quiz, setQuiz] = useState({});
     const navigate = useNavigate();
     const [quizToDelete, setQuizToDelete] = useState(null);
@@ -61,7 +60,7 @@ const QuizPage = () => {
 
     const fetchQuizzes = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/quiz/getQuizzes', {timeout: 5000});
+            const response = await axios.get('http://localhost:8080/quiz/getQuizzes', { timeout: 5000 });
             console.log('Quiz ID:', quizId);
             console.log('Fetched Quiz Data:', response.data);
             setQuizzes(response.data);
@@ -98,7 +97,7 @@ const QuizPage = () => {
     };
 
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setQuiz({
             ...quiz,
             [name]: value,
@@ -121,58 +120,54 @@ const QuizPage = () => {
         handleUpdateQuiz(quiz);
     };
 
-
     return (
         <div className="container">
-
-
             <Table className="mt-3">
-            <thead className="table-header">
-            <tr>
-                <th className="row-cols-md-auto">Title</th>
-                <th className="row-cols-md-auto">Category</th>
-                <th className="row-cols-md-auto">Questions</th>
-                <th></th>
-                <th></th>
-                <th></th>
-
-            </tr>
-            </thead>
-                <tbody>
-                {quizzes.map((quiz) => (
-                    <tr key={quiz.id}>
-                        <td width="28%">{quiz.title}</td>
-                        <td width="28%">{quiz.category}</td>
-                        <td> <span> {quiz.questions.length} </span>
-
-                            <Link to={`/question-form/${quiz.id}`}>
-                                <Button  onClick={() => handleAddQuestions(quiz)}>
-
-                                </Button>
-                            </Link>
-                        </td>
-                        <td>
-                            <Link to={`/quizzes/${quiz.id}`}>
-                                <Button variant="warning" onClick={() => handleEditQuiz(quiz)}>
-                                    Update
-                                </Button>
-                            </Link>
-                        </td>
-
-                        <td>
-                            <Link to={`/takeQuiz/${quiz.id}`}>
-                                <Button variant="success" >
-                                    Take Quiz
-                                </Button>
-                            </Link>
-                        </td>
-                        <td>
-                            <Button variant="danger" onClick={() => handleDeleteQuiz(quiz.id)}>
-                                Delete
-                            </Button>
-                        </td>
+                <thead className="table-header">
+                    <tr>
+                        <th className="row-cols-md-auto">Title</th>
+                        <th className="row-cols-md-auto">Category</th>
+                        <th className="row-cols-md-auto">Questions</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
-                ))}
+                </thead>
+                <tbody>
+                    {quizzes.map((quiz) => (
+                        <tr key={quiz.id}>
+                            <td width="28%">{quiz.title}</td>
+                            <td width="28%">{quiz.category}</td>
+                            <td> <span> {quiz.questions.length} </span>
+
+                                <Link to={`/question-form/${quiz.id}`}>
+                                    <Button onClick={() => handleAddQuestions(quiz)}>
+
+                                    </Button>
+                                </Link>
+                            </td>
+                            <td>
+                                <Link to={`/quizzes/${quiz.id}`}>
+                                    <Button variant="warning" onClick={() => handleEditQuiz(quiz)}>
+                                        Update
+                                    </Button>
+                                </Link>
+                            </td>
+
+                            <td>
+                                <Link to={`/takeQuiz/${quiz.id}`}>
+                                    <Button variant="success" >
+                                        Take Quiz
+                                    </Button>
+                                </Link>
+                            </td>
+                            <td>
+                                <Button variant="danger" onClick={() => handleDeleteQuiz(quiz.id)}>
+                                    Delete
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
 
@@ -224,76 +219,62 @@ const QuizPage = () => {
                             </InputGroup>
 
                             {/* Display list of questions */}
-                            <div className="mb-3 shadow">
-                                <h3>Quiz questions:</h3>
-                                <ul className="list-group">
-                                    {questions.map((question) => (
-                                        <li className="list-group-item"
-                                            key={question.id}>
-                                            <div className="row">
-                                            <div className="flex-wrap justify-content-between
-                                            align-items-center col-lg-9">
-                                            {question.text}
-                                            </div>
-                                                <div className="col-lg-3">
-                                            <Button
-                                                variant="outline-danger" className="btn btn-text-center mb-2"
-                                                onClick={() => handleRemoveQuestion(question.id)}
-                                            >
-                                                Remove
-                                            </Button>
-                                            </div>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            {/* Add other form fields */}
-                            <br />
+<Card className="mt-3">
+                                <Card.Body>
+                                    <h5>List of Questions:</h5>
+                                    <ul>
+                                        {questions.map((question) => (
+                                            <li key={question.id}>
+                                                {question.content}
+                                                <Button
+                                                    className="ml-2"
+                                                    variant="danger"
+                                                    size="sm"
+                                                    onClick={() => handleRemoveQuestion(question.id)}
+                                                >
+                                                    Remove
+                                                </Button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Card.Body>
+                            </Card>
                         </Modal.Body>
 
                         <Modal.Footer>
-                            <Button variant="success" type="submit">
-                                Update Quiz
+                            <Button variant="secondary" onClick={handleCloseEditForm}>
+                                Close
+                            </Button>
+                            <Button variant="primary" type="submit">
+                                Save Changes
                             </Button>
                         </Modal.Footer>
                     </form>
                 </Modal>
             </Modal.Dialog>
 
-            {/* Delete Modal */}
-            <Modal show={quizToDelete !== null} onHide={handleCancelDelete}>
+            {/* Delete Quiz Confirmation Modal */}
+            <Modal show={!!quizToDelete} onHide={handleCancelDelete}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm Deletion</Modal.Title>
+                    <Modal.Title>Confirm Delete</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Are you sure you want to delete this quiz?</p>
+                    Are you sure you want to delete this quiz?
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="danger" onClick={handleConfirmDelete}>
-                        Confirm
-                    </Button>
                     <Button variant="secondary" onClick={handleCancelDelete}>
                         Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleConfirmDelete}>
+                        Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            <Card className="text-center">
-                <Card.Header>Explore Trivia Explosion!</Card.Header>
-                <Card.Body>
-                    <Card.Title>Create Your Own Quiz</Card.Title>
-                    <Card.Text>
-                        Dive into the world of knowledge and fun! Craft your personalized quiz and challenge others.
-                        With supporting questions, create a compelling quiz that others would love to take.
-                    </Card.Text>
-
-                    <Button size="lg" variant="success shadow" onClick={handleCreateQuizButtonClick}>
-                        CREATE QUIZ
-                    </Button>
-                </Card.Body>
-            </Card>
-
+            {/* Create Quiz Button */}
+            <Button variant="primary" onClick={handleCreateQuizButtonClick}>
+                Create Quiz
+            </Button>
         </div>
     );
 };
