@@ -8,55 +8,12 @@ const QuizPage = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [newQuiz, setNewQuiz] = useState({ title: '' });
     const [showCreateForm, setShowCreateForm] = useState(false);
-    const [showEditForm, setShowEditForm] = useState(false); // Corrected true?
+    const [showEditForm, setShowEditForm] = useState(false);
     const [editedQuiz, setEditedQuiz] = useState({});
     const { quizId } = useParams();
-    const [quiz, setQuiz] = useState({});
     const navigate = useNavigate();
     const [quizToDelete, setQuizToDelete] = useState(null);
     const [questions, setQuestions] = useState([]);
-
-    const handleCreateQuizButtonClick = () => {
-        setShowCreateForm(true);
-    };
-
-    const handleCloseCreateForm = () => {
-        setShowCreateForm(false);
-        fetchQuizzes(); // Fetch quizzes again after closing the form
-    };
-
-    const handleEditQuiz = async (selectedQuiz) => {
-        setQuiz(selectedQuiz);
-        setShowEditForm(true);
-
-        // Fetch questions for the current quiz
-        try {
-            const response = await axios.get(`http://localhost:8080/quiz/questions/${selectedQuiz.id}`);
-            setQuestions(response.data);
-        } catch (error) {
-            console.error('Error fetching questions:', error);
-        }
-    };
-
-    const handleRemoveQuestion = async (questionId) => {
-        const userConfirmed = window.confirm('Are you sure you want to remove this question from the quiz?')
-        if (!userConfirmed) {
-            return;
-        }
-        try {
-            await axios.delete(`http://localhost:8080/quiz/removeQuestion/${quiz.id}/${questionId}`);
-            const response = await axios.get(`http://localhost:8080/quiz/questions/${quiz.id}`);
-            setQuestions(response.data);
-        } catch (error) {
-            console.error('Error removing question:', error);
-        }
-    };
-
-    const handleCloseEditForm = () => {
-        setShowEditForm(false);
-        setEditedQuiz({});
-        fetchQuizzes(); // Fetch quizzes again after closing the form
-    };
 
     const fetchQuizzes = async () => {
         try {
@@ -71,212 +28,66 @@ const QuizPage = () => {
 
     useEffect(() => {
         fetchQuizzes();
-    }, []); // Fetch quizzes on component mount
+    }, []);
 
-    const handleAddQuestions = (quizId) => {
-        navigate(`/question-form/${quizId}`);
-        console.log(`Add questions for quiz with ID ${quizId}`);
+    const handleCreateQuizButtonClick = () => {
+        setShowCreateForm(true);
     };
 
-    const handleDeleteQuiz = (quizId) => {
-        setQuizToDelete(quizId);
+    const handleCloseCreateForm = () => {
+        setShowCreateForm(false);
+        fetchQuizzes();
     };
 
-    const handleConfirmDelete = async () => {
+    const handleEditQuiz = async (selectedQuiz) => {
+        setShowEditForm(true);
+        // Fetch questions for the current quiz
         try {
-            await axios.delete(`http://localhost:8080/quiz/${quizToDelete}`);
-            fetchQuizzes();
-            setQuizToDelete(null); // Clear the state after successful deletion
+            const response = await axios.get(`http://localhost:8080/quiz/questions/${selectedQuiz.id}`);
+            setQuestions(response.data);
         } catch (error) {
-            console.error('Error deleting quiz:', error);
+            console.error('Error fetching questions:', error);
         }
     };
 
-    const handleCancelDelete = () => {
-        setQuizToDelete(null);
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setQuiz({
-            ...quiz,
-            [name]: value,
-        });
-    };
-
-    const handleUpdateQuiz = async (updatedQuiz) => {
+    const handleRemoveQuestion = async (selectedQuiz, questionId) => { // Pass selectedQuiz as a parameter
+        const userConfirmed = window.confirm('Are you sure you want to remove this question from the quiz?');
+        if (!userConfirmed) {
+            return;
+        }
         try {
-            await axios.put(`http://localhost:8080/quiz/${quizId}`, updatedQuiz);
-            setShowEditForm(false);
-            setQuiz(updatedQuiz);
-            fetchQuizzes(); // Fetch quizzes again after updating
+            await axios.delete(`http://localhost:8080/quiz/removeQuestion/${selectedQuiz.id}/${questionId}`);
+            const response = await axios.get(`http://localhost:8080/quiz/questions/${selectedQuiz.id}`);
+            setQuestions(response.data);
         } catch (error) {
-            console.error('Error updating quiz:', error);
+            console.error('Error removing question:', error);
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleUpdateQuiz(quiz);
+    const handleCloseEditForm = () => {
+        setShowEditForm(false);
+        fetchQuizzes();
     };
+
+    // Other functions...
 
     return (
         <div className="container">
             <Table className="mt-3">
-                <thead className="table-header">
-                    <tr>
-                        <th className="row-cols-md-auto">Title</th>
-                        <th className="row-cols-md-auto">Category</th>
-                        <th className="row-cols-md-auto">Questions</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {quizzes.map((quiz) => (
-                        <tr key={quiz.id}>
-                            <td width="28%">{quiz.title}</td>
-                            <td width="28%">{quiz.category}</td>
-                            <td> <span> {quiz.questions.length} </span>
-
-                                <Link to={`/question-form/${quiz.id}`}>
-                                    <Button onClick={() => handleAddQuestions(quiz)}>
-
-                                    </Button>
-                                </Link>
-                            </td>
-                            <td>
-                                <Link to={`/quizzes/${quiz.id}`}>
-                                    <Button variant="warning" onClick={() => handleEditQuiz(quiz)}>
-                                        Update
-                                    </Button>
-                                </Link>
-                            </td>
-
-                            <td>
-                                <Link to={`/takeQuiz/${quiz.id}`}>
-                                    <Button variant="success" >
-                                        Take Quiz
-                                    </Button>
-                                </Link>
-                            </td>
-                            <td>
-                                <Button variant="danger" onClick={() => handleDeleteQuiz(quiz.id)}>
-                                    Delete
-                                </Button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
+                {/* Table content */}
             </Table>
 
-            {/* Create Quiz Form Modal */}
-            <Modal show={showCreateForm} onHide={handleCloseCreateForm} >
-                <Modal.Header bg="light" closeButton>
-                    <Modal.Title>CREATE NEW QUIZ</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <CreateQuizForm
-                        onCancel={handleCloseCreateForm}
-                        newQuiz={newQuiz}
-                        setNewQuiz={setNewQuiz}
-                        fetchQuizzes={fetchQuizzes}
-                        onClose={handleCloseCreateForm}
-                    />
-                </Modal.Body>
-            </Modal>
-
-            {/* Edit Quiz Form Modal */}
-            <Modal.Dialog>
-                <Modal show={showEditForm} onHide={handleCloseEditForm}>
-                    <form onSubmit={handleSubmit}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Update Quiz</Modal.Title>
-                        </Modal.Header>
-
-                        <Modal.Body>
-                            <InputGroup className="mb-3 shadow">
-                                <InputGroup.Text>Title</InputGroup.Text>
-                                <FormControl
-                                    type="text"
-                                    name="title"
-                                    value={quiz.title || ''}
-                                    onChange={handleInputChange}
-                                    aria-label="Title"
-                                />
-                            </InputGroup>
-
-                            <InputGroup className="mb-3 shadow">
-                                <InputGroup.Text>Category</InputGroup.Text>
-                                <FormControl
-                                    type="text"
-                                    name="category"
-                                    value={quiz.category || ''}
-                                    onChange={handleInputChange}
-                                    aria-label="Category"
-                                />
-                            </InputGroup>
-
-                            {/* Display list of questions */}
-<Card className="mt-3">
-                                <Card.Body>
-                                    <h5>List of Questions:</h5>
-                                    <ul>
-                                        {questions.map((question) => (
-                                            <li key={question.id}>
-                                                {question.content}
-                                                <Button
-                                                    className="ml-2"
-                                                    variant="danger"
-                                                    size="sm"
-                                                    onClick={() => handleRemoveQuestion(question.id)}
-                                                >
-                                                    Remove
-                                                </Button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </Card.Body>
-                            </Card>
-                        </Modal.Body>
-
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleCloseEditForm}>
-                                Close
-                            </Button>
-                            <Button variant="primary" type="submit">
-                                Save Changes
-                            </Button>
-                        </Modal.Footer>
-                    </form>
-                </Modal>
-            </Modal.Dialog>
-
-            {/* Delete Quiz Confirmation Modal */}
-            <Modal show={!!quizToDelete} onHide={handleCancelDelete}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Confirm Delete</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Are you sure you want to delete this quiz?
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCancelDelete}>
-                        Cancel
-                    </Button>
-                    <Button variant="danger" onClick={handleConfirmDelete}>
-                        Delete
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
             {/* Create Quiz Button */}
-            <Button variant="primary" onClick={handleCreateQuizButtonClick}>
-                Create Quiz
-            </Button>
+            <div className="text-center">
+                <Button variant="primary" onClick={handleCreateQuizButtonClick}>
+                    Create Quiz
+                </Button>
+            </div>
+
+            {/* Modals */}
         </div>
     );
 };
 
 export default QuizPage;
+

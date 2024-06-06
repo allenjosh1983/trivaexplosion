@@ -1,4 +1,6 @@
 /* app.css */
+
+/* Global Styles */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -32,37 +34,34 @@ label {
 }
 
 input,
-select,
-button {
-  width: 100%;
-  padding: 8px 16px; /* Adjusted padding for all buttons */
+select {
+  width: 100%; /* Full width for input and select elements */
+  padding: 8px 16px;
   margin-bottom: 10px;
   box-sizing: border-box;
 }
 
+/* Global Button Styles */
 button {
   background-color: blue; /* Blue color for all buttons */
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 14px; /* Adjusted font size for all buttons */
+  padding: 8px 16px; /* Standard padding */
   cursor: pointer;
+  width: auto; /* Ensure buttons do not take full width by default */
+}
+
+button.custom-button {
+  width: 120px; /* Fixed width for custom buttons */
 }
 
 button:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
 
-.app-container {
-  font-family: 'Arial', sans-serif;
-}
-
-.header {
-  background-color: #333;
-  color: white;
-  padding: 10px;
-}
-
+/* Navigation Bar Styles */
 .nav-list {
   list-style: none;
   margin: 0;
@@ -83,34 +82,8 @@ button:hover {
 .nav-link:hover {
   text-decoration: underline;
 }
-/* app.css */
 
-/* Add these new rules for centering */
-.Content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.Question {
-  margin-bottom: 20px;
-}
-
-.Option {
-  margin-bottom: 10px;
-}
-
-.Result {
-  margin-top: 20px;
-}
-.content-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20vh; /* Adjust the margin as needed */
-  text-align: center;
-}
+/* Centering for Login Page */
 .custom-button-container {
   display: flex;
   flex-direction: column;
@@ -121,20 +94,12 @@ button:hover {
 }
 
 .custom-button {
-  width: 120px;
+  width: 120px; /* Fixed width for login buttons */
   margin-top: 10px;
   align-self: center; /* Ensure the button is centered */
 }
 
-label,
-input {
-  width: 250px;
-  margin-bottom: 10px;
-}
-
-button {
-  align-self: center; /* Ensure the button is centered */
-}
+/* Additional Styles */
 .email-container {
   display: flex;
   flex-direction: column;
@@ -161,29 +126,12 @@ button {
   margin-top: 10px;
   align-self: center;
 }
+
 /* Adjust these styles */
 label,
 input {
-  width: auto; /* Try changing the width property */
+  width: auto; /* Ensure input fields do not take full width */
   margin-bottom: 10px;
-}
-
-/* Add these rules for centering */
-.question-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.question-text {
-  flex-grow: 1;
-  margin-right: 10px; /* Optional: for spacing between text and buttons */
-}
-
-.question-actions {
-  display: flex;
-  gap: 10px;
 }
 
 /* Centering and button styles */
@@ -202,10 +150,11 @@ input {
 }
 
 .button {
-  width: 120px;
+  width: 120px; /* Fixed width for buttons */
   margin-top: 10px;
   align-self: center;
 }
+
 .custom-form {
   display: flex;
   flex-direction: column;
@@ -220,7 +169,7 @@ input {
 }
 
 .custom-button {
-  width: 120px;
+  width: 120px; /* Fixed width for custom buttons */
   margin-top: 10px;
   align-self: center;
 }
@@ -228,6 +177,7 @@ input {
 /* Center text input fields */
 input[type="text"],
 input[type="password"],
-textarea {}
+textarea {
   width: 100%; /* Ensure input fields take full width */
-  padding: 8px; /* Adjusted*/
+  padding: 8px; /* Adjusted */
+}
