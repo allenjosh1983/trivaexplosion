@@ -28,7 +28,7 @@ function HomePage() {
     const getQuiz = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple');
+            const response = await fetch('https://opentdb.com/api.php?amount=2&category=12&type=multiple');
             const data = await response.json();
             const questionData = data.results[0];
             setQuiz(questionData.question);
