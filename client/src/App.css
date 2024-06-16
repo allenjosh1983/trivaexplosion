@@ -181,3 +181,10 @@ textarea {
   width: 100%; /* Ensure input fields take full width */
   padding: 8px; /* Adjusted */
 }
+
+.quiz-form-container {
+  height: 50vh; /* Set the container height to 50% of the viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
