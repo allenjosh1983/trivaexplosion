@@ -1,5 +1,3 @@
-/* app.css */
-
 /* Global Styles */
 body {
   font-family: 'Arial', sans-serif;
@@ -35,33 +33,31 @@ label {
 
 input,
 select {
-  width: 100%; /* Full width for input and select elements */
+  width: 100%;
   padding: 8px 16px;
   margin-bottom: 10px;
   box-sizing: border-box;
 }
 
-/* Global Button Styles */
 button {
-  background-color: blue; /* Blue color for all buttons */
+  background-color: blue;
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 14px; /* Adjusted font size for all buttons */
-  padding: 8px 16px; /* Standard padding */
+  font-size: 14px;
+  padding: 8px 16px;
   cursor: pointer;
-  width: auto; /* Ensure buttons do not take full width by default */
+  width: auto;
 }
 
 button.custom-button {
-  width: 120px; /* Fixed width for custom buttons */
+  width: 120px;
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
-/* Navigation Bar Styles */
 .nav-list {
   list-style: none;
   margin: 0;
@@ -83,32 +79,35 @@ button:hover {
   text-decoration: underline;
 }
 
-/* Centering for Login Page */
 .custom-button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  text-align: center; /* Add text-align to center inline elements */
+  text-align: center;
 }
 
 .custom-button {
-  width: 120px; /* Fixed width for login buttons */
+  width: 120px;
   margin-top: 10px;
-  align-self: center; /* Ensure the button is centered */
+  align-self: center;
 }
 
-/* Additional Styles */
 .email-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.email-container label {
+  display: block;
   margin-bottom: 8px;
 }
 
 .email-container input {
-  width: 250px;
+  width: 100%;
+  max-width: 400px; /* Adjusted width for input fields */
+  padding: 10px 16px;
   margin-bottom: 10px;
 }
 
@@ -117,42 +116,13 @@ button:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 50vh;
   text-align: center;
 }
 
 .email-button {
   width: 120px;
   margin-top: 10px;
-  align-self: center;
-}
-
-/* Adjust these styles */
-label,
-input {
-  width: auto; /* Ensure input fields do not take full width */
-  margin-bottom: 10px;
-}
-
-/* Centering and button styles */
-.Content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.button {
-  width: 120px; /* Fixed width for buttons */
-  margin-top: 10px;
-  align-self: center;
 }
 
 .custom-form {
@@ -164,27 +134,23 @@ input {
 
 .custom-input {
   width: 100%;
-  max-width: 300px;
+  max-width: 400px; /* Adjusted width for input fields */
   margin-bottom: 20px;
 }
 
 .custom-button {
-  width: 120px; /* Fixed width for custom buttons */
+  width: 120px;
   margin-top: 10px;
   align-self: center;
 }
 
-/* Center text input fields */
 input[type="text"],
 input[type="password"],
 textarea {
-  width: 100%; /* Ensure input fields take full width */
-  padding: 8px; /* Adjusted */
+  width: 100%;
+  padding: 8px;
 }
 
-.quiz-form-container {
-  height: 50vh; /* Set the container height to 50% of the viewport height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+input.custom-input-wide {
+  max-width: 800px; /* New class for making input fields twice as wide */
 }

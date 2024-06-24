@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import {Button, Card, Container, Navbar} from 'react-bootstrap';
+import '../App.css'; // Adjust the import path to correctly locate App.css
 
 function HomePage() {
     const [quiz, setQuiz] = useState('');
@@ -93,74 +93,55 @@ function HomePage() {
     };
 
     return (
-        <div >
-            <Navbar expand="lg" className="bg-body-tertiary">
-            </Navbar>
-
-
-            <div className="text-center"> {/* Add a container for centering */}
-                <Container>
-                    <Card className="text-center">
-                        <Card.Header>Welcome to Trivia Explosion!</Card.Header>
-                        <Card.Body>
-                            <Card.Title>Unleash the thrill of trivia with a variety of quizzes.</Card.Title>
-                            <Card.Text>
-                                Whether you're an unregistered user looking for a random quiz or a quiz creator, we've
-                                got something for you.
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                    <div className="d-flex justify-content-center">
+        <div className="container quiz-container">
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <div className="text-center">
+                        <div className="jumbotron">
                             {loading ? (
                                 <p>Loading...</p>
                             ) : (
                                 <>
-                                    <div className="jumbotron">
-                                        {quiz && (
-                                            <div dangerouslySetInnerHTML={{__html: quiz}}
-                                                 className="Question display-6"></div>
-                                        )}
+                                    {quiz && (
+                                        <div dangerouslySetInnerHTML={{ __html: quiz }} className="Question display-6"></div>
+                                    )}
 
-                                        <form>
-                                            {options.map((option, index) => (
-                                                <div key={index} className="Option text-center">
-                                                    <label
-                                                        dangerouslySetInnerHTML={{__html: option}}
-                                                        htmlFor={`option${index}`}
-                                                    ></label>
-                                                    <br/> {/* Add a line break to move to the next line for the next option */}
-                                                    <input
-                                                        type="radio"
-                                                        id={`option${index}`}
-                                                        name="quizOptions"
-                                                        value={option}
-                                                        checked={selectedAnswer === option}
-                                                        onChange={handleAnswerChange}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </form>
-                                        {result && (
-                                            <div style={{marginTop: '20px'}} className="Result alert alert-primary" role="alert">
-                                                <p>{result}</p>
+                                    <form>
+                                        {options.map((option, index) => (
+                                            <div key={index} className="Option text-center">
+                                                <label dangerouslySetInnerHTML={{ __html: option }} htmlFor={`option${index}`}></label>
+                                                <br />
+                                                <input
+                                                    type="radio"
+                                                    id={`option${index}`}
+                                                    name="quizOptions"
+                                                    value={option}
+                                                    checked={selectedAnswer === option}
+                                                    onChange={handleAnswerChange}
+                                                />
                                             </div>
-                                        )}
-                                        <div style={{marginTop: '20px'}}>
-                                            <Button variant="primary" onClick={handleGenerateQuiz}>Trivia
-                                                Explosion!</Button>
+                                        ))}
+                                    </form>
+
+                                    {result && (
+                                        <div style={{ marginTop: '20px' }} className="Result alert alert-primary" role="alert">
+                                            <p>{result}</p>
                                         </div>
+                                    )}
+
+                                    <div style={{ marginTop: '20px' }}>
+                                        <button className="btn btn-primary" onClick={handleGenerateQuiz}>
+                                            Trivia Explosion!
+                                        </button>
                                     </div>
                                 </>
-
                             )}
-
+                        </div>
                     </div>
-                </Container>
+                </div>
             </div>
         </div>
-
-
-);
+    );
 }
 
 export default HomePage;
