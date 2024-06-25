@@ -23,7 +23,7 @@ function LoginPage() {
 
     return (
         <div className="container login-container">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center align-items-center min-vh-100"> {/* Centering vertically */}
                 <div className="col-md-6">
                     <form className="custom-form">
                         <div className="form-group">

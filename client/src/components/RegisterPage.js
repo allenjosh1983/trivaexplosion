@@ -28,7 +28,7 @@ function RegisterPage() {
 
     return (
         <div className="container register-container">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center align-items-center min-vh-100"> {/* Centering vertically */}
                 <div className="col-md-6">
                     <form className="custom-form">
                         <div className="form-group">

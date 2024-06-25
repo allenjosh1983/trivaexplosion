@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../App.css'; // Adjust the import path to correctly locate App.css
@@ -12,20 +12,7 @@ function HomePage() {
     const [incorrectResponses, setIncorrectResponses] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            getQuiz();
-            setLoading(false);
-        }, 5000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
-    useEffect(() => {
-        handleQuizSubmit();
-    }, [selectedAnswer, correctAnswer, options, incorrectResponses]);
-
-    const getQuiz = async () => {
+    const getQuiz = useCallback(async () => {
         try {
             setLoading(true);
             const response = await fetch('https://opentdb.com/api.php?amount=2&category=12&type=multiple');
@@ -51,20 +38,9 @@ function HomePage() {
             console.log('Error fetching quiz:', error);
             setLoading(false);
         }
-    };
+    }, []);
 
-    const handleGenerateQuiz = (event) => {
-        event.preventDefault();
-        getQuiz();
-        setSelectedAnswer('');
-        setResult('');
-    };
-
-    const handleAnswerChange = (event) => {
-        setSelectedAnswer(event.target.value);
-    };
-
-    const handleQuizSubmit = () => {
+    const handleQuizSubmit = useCallback(() => {
         if (selectedAnswer === '') {
             setResult('~ Choose Wisely ~');
             return;
@@ -82,6 +58,30 @@ function HomePage() {
             const currentResponse = incorrectResponses[currentIndex];
             setResult(currentResponse);
         }
+    }, [selectedAnswer, correctAnswer, options, incorrectResponses, getQuiz]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            getQuiz();
+            setLoading(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, [getQuiz]);
+
+    useEffect(() => {
+        handleQuizSubmit();
+    }, [selectedAnswer, correctAnswer, options, incorrectResponses, handleQuizSubmit]);
+
+    const handleGenerateQuiz = (event) => {
+        event.preventDefault();
+        getQuiz();
+        setSelectedAnswer('');
+        setResult('');
+    };
+
+    const handleAnswerChange = (event) => {
+        setSelectedAnswer(event.target.value);
     };
 
     const shuffleArray = (array) => {

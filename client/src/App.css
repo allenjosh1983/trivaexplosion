@@ -1,4 +1,3 @@
-/* Global Styles */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -20,6 +19,19 @@ header {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 100px); /* Adjust as necessary to accommodate header height */
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
 }
 
 h1 {
@@ -116,7 +128,7 @@ button:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  min-height: calc(100vh - 200px); /* Full viewport height minus approximate navbar height */
   text-align: center;
 }
 

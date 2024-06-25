@@ -54,7 +54,7 @@ function QuizChallengeForm() {
                             <label htmlFor="email">Email:</label>
                             <input
                                 type="email"
-                                className="form-control custom-input"
+                                className="form-control"
                                 id="email"
                                 value={email}
                                 onChange={handleEmailChange}
@@ -65,7 +65,7 @@ function QuizChallengeForm() {
                             <label htmlFor="confirmEmail">Confirm Email:</label>
                             <input
                                 type="email"
-                                className="form-control custom-input"
+                                className="form-control"
                                 id="confirmEmail"
                                 value={confirmEmail}
                                 onChange={handleConfirmEmailChange}
