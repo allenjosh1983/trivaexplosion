@@ -3,10 +3,17 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
+  background-image: url('https://domf5oio6qrcr.cloudfront.net/medialibrary/8718/brain-music-health-memory.jpg'); /* Replace with the correct path to your image */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Ensures the background stays fixed during scrolling */
+  height: 100vh; /* Ensures the body takes up the full height of the viewport */
+  width: 100vw; /* Ensures the body takes up the full width of the viewport */
 }
 
 header {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.8); /* Adds a semi-transparent background to the header */
   color: white;
   padding: 20px;
   text-align: center;
@@ -16,7 +23,7 @@ header {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9); /* Adds a semi-transparent background to the container */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
