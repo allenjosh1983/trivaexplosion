@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '../App.css'; // Adjust the import path to correctly locate App.css
 
-function QuizChallengeForm() {
+function InviteForm() {
     const [email, setEmail] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
     const [emailMismatch, setEmailMismatch] = useState(false);
@@ -49,6 +49,7 @@ function QuizChallengeForm() {
         <div className="container email-button-container">
             <div className="row justify-content-center">
                 <div className="col-md-6">
+                    <h1 className="invite-header text-center">Invite</h1>
                     <form className="custom-form">
                         <div className="form-group">
                             <label htmlFor="email">Email:</label>
@@ -73,9 +74,9 @@ function QuizChallengeForm() {
                             {emailMismatch && <p className="text-danger">Emails do not match</p>}
                         </div>
                         <button type="button" onClick={handleSendQuiz} className="btn btn-primary custom-button">
-                            Send Quiz
+                            Invite
                         </button>
-                        {quizSent && <p className="text-success mt-3">Quiz sent!</p>}
+                        {quizSent && <p className="text-success mt-3">Invite sent!</p>}
                     </form>
                 </div>
             </div>
@@ -83,4 +84,4 @@ function QuizChallengeForm() {
     );
 }
 
-export default QuizChallengeForm;
+export default InviteForm;
