@@ -3,17 +3,17 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f0f0f0;
-  background-image: url('https://domf5oio6qrcr.cloudfront.net/medialibrary/8718/brain-music-health-memory.jpg'); /* Replace with the correct path to your image */
-  background-size: cover; /* Ensures the image covers the entire background */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  background-attachment: fixed; /* Ensures the background stays fixed during scrolling */
-  height: 100vh; /* Ensures the body takes up the full height of the viewport */
-  width: 100vw; /* Ensures the body takes up the full width of the viewport */
+  background-image: url('https://domf5oio6qrcr.cloudfront.net/medialibrary/8718/brain-music-health-memory.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
 }
 
 header {
-  background-color: rgba(51, 51, 51, 0.8); /* Adds a semi-transparent background to the header */
+  background-color: rgba(51, 51, 51, 0.8);
   color: white;
   padding: 20px;
   text-align: center;
@@ -23,16 +23,17 @@ header {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Adds a semi-transparent background to the container */
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .quiz-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: calc(100vh - 100px); /* Adjust as necessary to accommodate header height */
+  height: calc(100vh - 100px);
 }
 
 .jumbotron {
@@ -46,7 +47,7 @@ h1 {
 }
 
 .invite-header {
-  font-size: 2.5rem; /* Adjust the size as needed */
+  font-size: 2.5rem;
 }
 
 label {
@@ -55,11 +56,48 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
-  padding: 8px 16px;
+  padding: 8px;
   margin-bottom: 10px;
   box-sizing: border-box;
+}
+
+/* Ensure consistent width for input fields across pages */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+input.full-width-input,
+input.form-control,
+input.custom-input,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  width: 100%;
+  max-width: 350px; /* Adjusted to match size */
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Ensure consistent width for the invite page */
+.invite-container .form-control,
+.invite-container input.full-width-input {
+  max-width: 350px; /* Adjust as needed */
+}
+
+/* Center-align full-width-input on invite page */
+.invite-container input.full-width-input {
+  margin: 0 auto; /* Center-align */
+  display: block;
 }
 
 button {
@@ -129,17 +167,18 @@ button:hover {
 
 .email-container input {
   width: 100%;
-  max-width: 400px; /* Adjusted width for input fields */
+  max-width: 350px; /* Adjusted to match size */
   padding: 10px 16px;
   margin-bottom: 10px;
 }
 
+/* Email button container */
 .email-button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 200px); /* Full viewport height minus approximate navbar height */
+  min-height: calc(100vh - 200px);
   text-align: center;
 }
 
@@ -157,23 +196,31 @@ button:hover {
 
 .custom-input {
   width: 100%;
-  max-width: 400px; /* Adjusted width for input fields */
+  max-width: 350px; /* Adjusted to match size */
   margin-bottom: 20px;
 }
 
-.custom-button {
-  width: 120px;
-  margin-top: 10px;
-  align-self: center;
-}
-
-input[type="text"],
-input[type="password"],
-textarea {
-  width: 100%;
-  padding: 8px;
-}
-
 input.custom-input-wide {
-  max-width: 800px; /* New class for making input fields twice as wide */
+  max-width: 800px; /* Use this for wider fields if needed */
+}
+
+.custom-form .form-group {
+  margin-bottom: 20px; /* Consistent spacing */
+}
+
+.form-control {
+  width: 100%;
+  max-width: 350px; /* Ensure consistency */
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.full-width-input {
+  max-width: 350px; /* Adjusted to match size */
+  margin: 0 auto; /* Center-align */
+  display: block;
+}
+
+.btn.btn-primary.custom-button {
+  width: auto; /* Adjust button width */
 }

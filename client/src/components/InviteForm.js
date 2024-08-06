@@ -1,87 +1,58 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import '../App.css'; // Adjust the import path to correctly locate App.css
+import '../App.css'; // Ensure this path is correct
 
-function InviteForm() {
-    const [email, setEmail] = useState('');
-    const [confirmEmail, setConfirmEmail] = useState('');
-    const [emailMismatch, setEmailMismatch] = useState(false);
-    const [quizSent, setQuizSent] = useState(false);
-    const [emailError, setEmailError] = useState('');
+function InvitePage() {
+  const [email, setEmail] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-        setEmailMismatch(false);
-        setEmailError('');
-    };
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
-    const handleConfirmEmailChange = (event) => {
-        setConfirmEmail(event.target.value);
-        setEmailMismatch(false);
-        setEmailError('');
-    };
+  const handleConfirmEmailChange = (event) => {
+    setConfirmEmail(event.target.value);
+  };
 
-    const validateEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            setEmailError('Please enter a valid email address.');
-            return false;
-        }
-        return true;
-    };
+  const handleSendQuiz = () => {
+    // Add your logic for sending quiz here
+    console.log('Sending quiz to:', email, 'and confirm email:', confirmEmail);
+  };
 
-    const handleSendQuiz = () => {
-        const isEmailValid = validateEmail(email);
-
-        if (isEmailValid && email === confirmEmail) {
-            // Send quiz logic
-            setQuizSent(true);
-            // Clear form fields
-            setEmail('');
-            setConfirmEmail('');
-        } else {
-            setEmailMismatch(true);
-        }
-    };
-
-    return (
-        <div className="container email-button-container">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <h1 className="invite-header text-center">Invite</h1>
-                    <form className="custom-form">
-                        <div className="form-group">
-                            <label htmlFor="email">Email:</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="email"
-                                value={email}
-                                onChange={handleEmailChange}
-                            />
-                            {emailError && <p className="text-danger">{emailError}</p>}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="confirmEmail">Confirm Email:</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="confirmEmail"
-                                value={confirmEmail}
-                                onChange={handleConfirmEmailChange}
-                            />
-                            {emailMismatch && <p className="text-danger">Emails do not match</p>}
-                        </div>
-                        <button type="button" onClick={handleSendQuiz} className="btn btn-primary custom-button">
-                            Invite
-                        </button>
-                        {quizSent && <p className="text-success mt-3">Invite sent!</p>}
-                    </form>
-                </div>
+  return (
+    <div className="container invite-container">
+      <div className="row justify-content-center align-items-center min-vh-100">
+        <div className="col-md-6">
+          <form className="custom-form">
+            <div className="form-group email-container">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                className="form-control full-width-input"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
+              />
             </div>
+            <div className="form-group email-container">
+              <label htmlFor="confirmEmail">Confirm Email:</label>
+              <input
+                type="email"
+                className="form-control full-width-input"
+                id="confirmEmail"
+                value={confirmEmail}
+                onChange={handleConfirmEmailChange}
+              />
+            </div>
+            <button type="button" onClick={handleSendQuiz} className="btn btn-primary custom-button">
+              Send Quiz
+            </button>
+          </form>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
-export default InviteForm;
+export default InvitePage;

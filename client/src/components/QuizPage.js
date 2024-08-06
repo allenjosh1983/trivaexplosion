@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Table, Button, Modal, FormControl, InputGroup, Card } from 'react-bootstrap';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import CreateQuizForm from './CreateQuizForm';
+import '../App.css';
 
 const QuizPage = () => {
     const [quizzes, setQuizzes] = useState([]);
@@ -15,7 +16,7 @@ const QuizPage = () => {
     const [quizToDelete, setQuizToDelete] = useState(null);
     const [questions, setQuestions] = useState([]);
 
-    const fetchQuizzes = async () => {
+    const fetchQuizzes = useCallback(async () => {
         try {
             const response = await axios.get('http://localhost:8080/quiz/getQuizzes', { timeout: 5000 });
             console.log('Quiz ID:', quizId);
@@ -24,11 +25,11 @@ const QuizPage = () => {
         } catch (error) {
             console.error('Error fetching quizzes:', error);
         }
-    };
+    }, [quizId]);
 
     useEffect(() => {
         fetchQuizzes();
-    }, [fetchQuizzes]); // Add fetchQuizzes to the dependency array
+    }, [fetchQuizzes]);
 
     const handleCreateQuizButtonClick = () => {
         setShowCreateForm(true);
