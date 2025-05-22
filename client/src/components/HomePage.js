@@ -12,24 +12,26 @@ function HomePage() {
     const [incorrectResponses, setIncorrectResponses] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // 🌟 Function to Properly Decode HTML Entities
+    const decodeEntities = (text) => {
+        const parser = new DOMParser();
+        return parser.parseFromString(text, "text/html").body.textContent;
+    };
+
     const getQuiz = useCallback(async () => {
         try {
             setLoading(true);
             const response = await fetch('https://opentdb.com/api.php?amount=2&category=12&type=multiple');
             const data = await response.json();
             const questionData = data.results[0];
-            setQuiz(questionData.question);
+            setQuiz(decodeEntities(questionData.question)); // 🛠 Ensure question displays correctly
             setCorrectAnswer(questionData.correct_answer);
-            const allOptions = shuffleArray(questionData.incorrect_answers.concat(questionData.correct_answer));
+            const allOptions = [...new Set(shuffleArray(questionData.incorrect_answers.concat(questionData.correct_answer)))];
             setOptions(allOptions);
 
-            const questionResponses = allOptions.map((option, index) => {
-                if (option === questionData.correct_answer) {
-                    return 'Correct!';
-                } else {
-                    return `${option} is incorrect.`;
-                }
-            });
+            const questionResponses = allOptions.map((option) =>
+                option === questionData.correct_answer ? 'Correct!' : `${option} is incorrect.`
+            );
             setIncorrectResponses(questionResponses);
 
             setLoading(false);
@@ -42,7 +44,7 @@ function HomePage() {
 
     const handleQuizSubmit = useCallback(() => {
         if (selectedAnswer === '') {
-            setResult('~ Choose Wisely ~');
+            //setResult('~ Choose Wisely ~');
             return;
         }
 
@@ -55,8 +57,7 @@ function HomePage() {
             }, 5000);
         } else {
             const currentIndex = options.indexOf(selectedAnswer);
-            const currentResponse = incorrectResponses[currentIndex];
-            setResult(currentResponse);
+            setResult(incorrectResponses[currentIndex]);
         }
     }, [selectedAnswer, correctAnswer, options, incorrectResponses, getQuiz]);
 
@@ -80,10 +81,6 @@ function HomePage() {
         setResult('');
     };
 
-    const handleAnswerChange = (event) => {
-        setSelectedAnswer(event.target.value);
-    };
-
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -102,26 +99,35 @@ function HomePage() {
                                 <p>Loading...</p>
                             ) : (
                                 <>
+                                    {/* 🔄 Scrolling message ABOVE the question */}
+                                    <div className="scrolling-message-container top-message">
+                                        <p className="scrolling-message">Choose Wisely</p>
+                                    </div>
+
+                                    {/* 🔥 Question remains unchanged */}
                                     {quiz && (
-                                        <div dangerouslySetInnerHTML={{ __html: quiz }} className="Question display-6"></div>
+                                        <div className="Question display-6">{quiz}</div>
                                     )}
 
-                                    <form>
+                                    {/* 🔄 Scrolling message BELOW the question */}
+                                    <div className="scrolling-message-container bottom-message">
+                                        <p className="scrolling-message">Your Fate Awaits...</p>
+                                    </div>
+                                    )}
+
+                                    {/* 🔄 FIXED: One button per answer */}
+                                    <div className="answers-container">
                                         {options.map((option, index) => (
-                                            <div key={index} className="Option text-center">
-                                                <label dangerouslySetInnerHTML={{ __html: option }} htmlFor={`option${index}`}></label>
-                                                <br />
-                                                <input
-                                                    type="radio"
-                                                    id={`option${index}`}
-                                                    name="quizOptions"
-                                                    value={option}
-                                                    checked={selectedAnswer === option}
-                                                    onChange={handleAnswerChange}
-                                                />
-                                            </div>
+                                            <button key={index} className="answer-button" onClick={() => setSelectedAnswer(option)}>
+                                                {decodeEntities(option)}
+                                            </button>
                                         ))}
-                                    </form>
+                                    </div>
+
+                                    {/* 🔄 Scrolling message BELOW the question */}
+                                    <div className="scrolling-message-container bottom-message">
+                                        <p className="scrolling-message">Your Fate Awaits...</p>
+                                    </div>
 
                                     {result && (
                                         <div style={{ marginTop: '20px' }} className="Result alert alert-primary" role="alert">

@@ -1,226 +1,263 @@
+/* 🌌 Global Styling - Cyberpunk Aesthetic */
 body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-  background-image: url('https://domf5oio6qrcr.cloudfront.net/medialibrary/8718/brain-music-health-memory.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: 100vh;
-  width: 100vw;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0d0d0d;
+    color: #00ffcc;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+/* 🌓 Flip Mode */
+body.dark-mode {
+    background-color: #111;
+    color: #ff00ff;
+}
+
+/* 🔥 Header Styling */
 header {
-  background-color: rgba(51, 51, 51, 0.8);
-  color: white;
-  padding: 20px;
-  text-align: center;
+    background: linear-gradient(90deg, #00ffff, #0077ff); /* Neon blue */
+    color: white;
+    padding: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
 }
 
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
+/* 🎭 Cyberpunk Containers */
+.container, .quiz-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(0, 119, 255, 0.85); /* Bold neon blue */
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
+    color: white;
+    font-size: 18px;
 }
 
-.quiz-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: calc(100vh - 100px);
-}
-
-.jumbotron {
-  padding: 2rem 1rem;
-  background-color: #e9ecef;
-  border-radius: 0.3rem;
-}
-
-h1 {
-  color: #333;
-}
-
-.invite-header {
-  font-size: 2.5rem;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-/* Ensure consistent width for input fields across pages */
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-input.full-width-input,
-input.form-control,
-input.custom-input,
-input[type="text"],
-input[type="password"],
-input[type="email"],
-textarea {
-  width: 100%;
-  max-width: 350px; /* Adjusted to match size */
-  padding: 8px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-/* Ensure consistent width for the invite page */
-.invite-container .form-control,
-.invite-container input.full-width-input {
-  max-width: 350px; /* Adjust as needed */
-}
-
-/* Center-align full-width-input on invite page */
-.invite-container input.full-width-input {
-  margin: 0 auto; /* Center-align */
-  display: block;
-}
-
+/* 🦾 Cyberpunk Buttons */
 button {
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  padding: 8px 16px;
-  cursor: pointer;
-  width: auto;
-}
-
-button.custom-button {
-  width: 120px;
+    background: linear-gradient(90deg, #00ffff, #0077ff); /* Neon blue */
+    color: black;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
 }
 
 button:hover {
-  background-color: #0056b3;
+    filter: brightness(1.4);
 }
 
+/* 🔄 Flip Mode Button */
+#flipModeToggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #00ffff, #0077ff); /* Electric blue */
+    color: black;
+    padding: 10px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
+    transition: all 0.3s ease-in-out;
+}
+
+#flipModeToggle:hover {
+    filter: brightness(1.4);
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 1);
+}
+
+/* 🌐 Navbar */
 .nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.nav-item {
-  margin-right: 20px;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 12px;
+    margin: 0;
+    background: linear-gradient(90deg, #00ffff, #0077ff); /* Electric neon blue */
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
 }
 
 .nav-link {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: text-shadow 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-  text-decoration: underline;
+    text-shadow: 0px 0px 10px rgba(0, 255, 255, 1);
 }
 
-.custom-button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
+/* 🌌 Cyberpunk Neon Borders */
+input, textarea {
+    background: black;
+    color: white;
+    border: 2px solid #00ffff; /* Updated to neon blue */
+    padding: 10px;
 }
 
-.custom-button {
-  width: 120px;
-  margin-top: 10px;
-  align-self: center;
+/* 🎶 Glitch Effect */
+@keyframes glitch {
+    0% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
+    50% { text-shadow: -2px -2px 5px #00ffff, 2px 2px 5px #0077ff; }
+    100% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
 }
 
-.email-container {
-  margin-bottom: 20px;
-  width: 100%;
+h1 {
+    font-size: 3rem;
+    animation: glitch 0.5s infinite alternate;
+}
+@keyframes glitch {
+    0% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
+    50% { text-shadow: -2px -2px 5px #00ffff, 2px 2px 5px #0077ff; }
+    100% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
 }
 
-.email-container label {
-  display: block;
-  margin-bottom: 8px;
+h1 {
+    animation: glitch 0.5s infinite alternate;
+}
+button:hover {
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 1);
+    transform: scale(1.05);
+}
+.container {
+    background: rgba(0, 119, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+/* 🌌 Question Text - Bigger & Bolder */
+.question-text {
+    font-size: 32px; /* Increased size */
+    font-weight: bold;
+    color: #00ffff; /* Electric neon blue */
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 10px rgba(0, 255, 255, 1);
 }
 
-.email-container input {
-  width: 100%;
-  max-width: 350px; /* Adjusted to match size */
-  padding: 10px 16px;
-  margin-bottom: 10px;
+/* 🔥 "Choose Wisely" Container - Adjusted Size */
+.choose-wisely-container {
+    max-width: 900px; /* Increased width */
+    min-height: 200px; /* Ensures height expansion */
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(0, 119, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
+    text-align: center;
 }
 
-/* Email button container */
-.email-button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 200px);
-  text-align: center;
+/* 🎶 Enhanced Glitch Animation */
+.choose-wisely-text {
+    font-size: 24px; /* Larger text */
+    font-weight: bold;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: glitch 0.5s infinite alternate;
+}
+@keyframes scrollText {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
-.email-button {
-  width: 120px;
-  margin-top: 10px;
+.choose-wisely-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: absolute;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: scrollText 8s linear infinite;
+}
+.choose-wisely-container {
+    max-width: 900px;
+    min-height: 200px;
+    margin: 40px auto;
+    padding: 30px;
+    position: relative;
+    background: rgba(0, 119, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
+    text-align: center;
+    overflow: hidden;
 }
 
-.custom-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.answers-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 50px;
 }
 
-.custom-input {
-  width: 100%;
-  max-width: 350px; /* Adjusted to match size */
-  margin-bottom: 20px;
+.answer-button {
+    background: linear-gradient(90deg, #00ffff, #0077ff);
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
+    transition: all 0.3s ease-in-out;
 }
 
-input.custom-input-wide {
-  max-width: 800px; /* Use this for wider fields if needed */
+.answer-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 1);
+}
+@keyframes scrollLeft {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100vw); }
 }
 
-.custom-form .form-group {
-  margin-bottom: 20px; /* Consistent spacing */
+@keyframes scrollRight {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
 }
 
-.form-control {
-  width: 100%;
-  max-width: 350px; /* Ensure consistency */
-  padding: 8px;
-  box-sizing: border-box;
+.scrolling-message-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
-.full-width-input {
-  max-width: 350px; /* Adjusted to match size */
-  margin: 0 auto; /* Center-align */
-  display: block;
+.top-message .scrolling-message {
+    animation: scrollLeft 6s linear infinite;
 }
 
-.btn.btn-primary.custom-button {
-  width: auto; /* Adjust button width */
+.bottom-message .scrolling-message {
+    animation: scrollRight 6s linear infinite;
+}
+
+
+.scrolling-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: absolute;
+    white-space: nowrap;
+    animation: scrollText 8s linear infinite;
 }
