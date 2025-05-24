@@ -16,7 +16,7 @@ body.dark-mode {
 
 /* 🔥 Header Styling */
 header {
-    background: linear-gradient(90deg, #00ffff, #0077ff); /* Neon blue */
+    background: linear-gradient(90deg, #00ffff, #0077ff);
     color: white;
     padding: 20px;
     text-transform: uppercase;
@@ -30,7 +30,7 @@ header {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background: rgba(0, 119, 255, 0.85); /* Bold neon blue */
+    background: rgba(0, 119, 255, 0.85);
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
     color: white;
@@ -38,18 +38,6 @@ header {
 }
 
 /* 🦾 Cyberpunk Buttons */
-button {
-    background: linear-gradient(90deg, #00ffff, #0077ff); /* Neon blue */
-    color: black;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
-}
 
 button:hover {
     filter: brightness(1.4);
@@ -60,7 +48,7 @@ button:hover {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: linear-gradient(90deg, #00ffff, #0077ff); /* Electric blue */
+    background: linear-gradient(90deg, #00ffff, #0077ff);
     color: black;
     padding: 10px 16px;
     border-radius: 50px;
@@ -85,7 +73,7 @@ button:hover {
     gap: 20px;
     padding: 12px;
     margin: 0;
-    background: linear-gradient(90deg, #00ffff, #0077ff); /* Electric neon blue */
+    background: linear-gradient(90deg, #00ffff, #0077ff);
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
 }
@@ -106,10 +94,38 @@ button:hover {
 input, textarea {
     background: black;
     color: white;
-    border: 2px solid #00ffff; /* Updated to neon blue */
+    border: 2px solid #00ffff;
     padding: 10px;
 }
 
+/* 🔥 Quiz Answer Buttons */
+.answers-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+/* 🦾 Cyberpunk Buttons */
+.answer-button {
+    background: linear-gradient(90deg, #00ffff, #0077ff);
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-radius: 15px; /* 🔄 Rounded edges */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+}
+/* ✨ Remove shadow entirely */
+.answer-button:hover {
+    transform: scale(1.05);
+}
 /* 🎶 Glitch Effect */
 @keyframes glitch {
     0% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
@@ -121,111 +137,7 @@ h1 {
     font-size: 3rem;
     animation: glitch 0.5s infinite alternate;
 }
-@keyframes glitch {
-    0% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
-    50% { text-shadow: -2px -2px 5px #00ffff, 2px 2px 5px #0077ff; }
-    100% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
-}
 
-h1 {
-    animation: glitch 0.5s infinite alternate;
-}
-button:hover {
-    box-shadow: 0px 0px 15px rgba(0, 255, 255, 1);
-    transform: scale(1.05);
-}
-.container {
-    background: rgba(0, 119, 255, 0.3);
-    backdrop-filter: blur(10px);
-}
-/* 🌌 Question Text - Bigger & Bolder */
-.question-text {
-    font-size: 32px; /* Increased size */
-    font-weight: bold;
-    color: #00ffff; /* Electric neon blue */
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 2px;
-    text-shadow: 0px 0px 10px rgba(0, 255, 255, 1);
-}
-
-/* 🔥 "Choose Wisely" Container - Adjusted Size */
-.choose-wisely-container {
-    max-width: 900px; /* Increased width */
-    min-height: 200px; /* Ensures height expansion */
-    margin: 40px auto;
-    padding: 30px;
-    background: rgba(0, 119, 255, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
-    text-align: center;
-}
-
-/* 🎶 Enhanced Glitch Animation */
-.choose-wisely-text {
-    font-size: 24px; /* Larger text */
-    font-weight: bold;
-    color: #00ffff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    animation: glitch 0.5s infinite alternate;
-}
-@keyframes scrollText {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-.choose-wisely-text {
-    font-size: 24px;
-    font-weight: bold;
-    color: #00ffff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    position: absolute;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: scrollText 8s linear infinite;
-}
-.choose-wisely-container {
-    max-width: 900px;
-    min-height: 200px;
-    margin: 40px auto;
-    padding: 30px;
-    position: relative;
-    background: rgba(0, 119, 255, 0.3);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
-    text-align: center;
-    overflow: hidden;
-}
-
-.answers-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 50px;
-}
-
-.answer-button {
-    background: linear-gradient(90deg, #00ffff, #0077ff);
-    color: black;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px 20px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
-    transition: all 0.3s ease-in-out;
-}
-
-.answer-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 15px rgba(0, 255, 255, 1);
-}
 @keyframes scrollLeft {
     0% { transform: translateX(100vw); }
     100% { transform: translateX(-100vw); }
@@ -248,16 +160,4 @@ button:hover {
 
 .bottom-message .scrolling-message {
     animation: scrollRight 6s linear infinite;
-}
-
-
-.scrolling-message {
-    font-size: 24px;
-    font-weight: bold;
-    color: #00ffff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    position: absolute;
-    white-space: nowrap;
-    animation: scrollText 8s linear infinite;
 }
