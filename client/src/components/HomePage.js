@@ -12,7 +12,6 @@ function HomePage() {
     const [incorrectResponses, setIncorrectResponses] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // 🌟 Function to Properly Decode HTML Entities
     const decodeEntities = (text) => {
         const parser = new DOMParser();
         return parser.parseFromString(text, "text/html").body.textContent;
@@ -24,8 +23,10 @@ function HomePage() {
             const response = await fetch('https://opentdb.com/api.php?amount=2&category=12&type=multiple');
             const data = await response.json();
             const questionData = data.results[0];
-            setQuiz(decodeEntities(questionData.question)); // 🛠 Ensure question displays correctly
+
+            setQuiz(decodeEntities(questionData.question));
             setCorrectAnswer(questionData.correct_answer);
+
             const allOptions = [...new Set(shuffleArray(questionData.incorrect_answers.concat(questionData.correct_answer)))];
             setOptions(allOptions);
 
@@ -35,7 +36,6 @@ function HomePage() {
             setIncorrectResponses(questionResponses);
 
             setLoading(false);
-            console.log(data);
         } catch (error) {
             console.log('Error fetching quiz:', error);
             setLoading(false);
@@ -44,7 +44,6 @@ function HomePage() {
 
     const handleQuizSubmit = useCallback(() => {
         if (selectedAnswer === '') {
-            //setResult('~ Choose Wisely ~');
             return;
         }
 
@@ -113,7 +112,6 @@ function HomePage() {
                                     <div className="scrolling-message-container bottom-message">
                                         <p className="scrolling-message">Your Fate Awaits...</p>
                                     </div>
-                                    )}
 
                                     {/* 🔄 FIXED: One button per answer */}
                                     <div className="answers-container">
