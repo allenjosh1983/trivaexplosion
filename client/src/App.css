@@ -161,3 +161,39 @@ h1 {
 .bottom-message .scrolling-message {
     animation: scrollRight 6s linear infinite;
 }
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Ensures some space between button and text */
+}
+
+.toggle-text {
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--text-color); /* Adjusts for Flip Mode */
+    text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+}
+
+.toggle-text:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+.button-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Centers items horizontally */
+    margin-top: 20px;
+}
+
+.toggle-text {
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--text-color);
+    text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+    margin-top: 10px; /* Adds spacing */
+}
+
+.toggle-text:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
