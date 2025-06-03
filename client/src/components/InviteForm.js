@@ -46,7 +46,7 @@ function InvitePage() {
               />
             </div>
             <button type="button" onClick={handleSendQuiz} className="btn btn-primary custom-button">
-              Send Quiz
+              Invite
             </button>
           </form>
         </div>

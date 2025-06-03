@@ -3,15 +3,12 @@ import { Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import HomePage from './components/HomePage';
 import QuestionForm from './components/QuestionForm';
-import QuizPage from './components/QuizPage';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import TakeQuizPage from "./components/TakeQuizPage";
 import LeaderBoardPage from './components/LeaderBoardPage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
+import AuthPage from './components/AuthPage'; // 🔄 Updated to the merged Sign In/Sign Up page
 import InviteForm from './components/InviteForm';
-
 
 function App() {
     // 🌙 Flip Mode Function
@@ -33,9 +30,7 @@ function App() {
                 <nav>
                     <ul className="nav-list">
                         <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
-                        <li className="nav-item"><Link to="/login" className="nav-link">Login</Link></li>
-                        <li className="nav-item"><Link to="/register" className="nav-link">Register</Link></li>
-                        <li className="nav-item"><Link to="/quizzes" className="nav-link">Quiz Page</Link></li>
+                        <li className="nav-item"><Link to="/auth" className="nav-link">Sign In</Link></li>
                         <li className="nav-item"><Link to="/question-form" className="nav-link">Question Form</Link></li>
                         <li className="nav-item"><Link to="/invite" className="nav-link">Invite A Friend</Link></li>
                         <li className="nav-item"><Link to="/leaderboard" className="nav-link">Leaderboard</Link></li>
@@ -50,9 +45,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/quizzes" element={<QuizPage />} />
+                <Route path="/auth" element={<AuthPage />} /> {/* 🔄 Unified Sign In/Sign Up */}
                 <Route path="/takeQuiz/:quizId" element={<TakeQuizPage />} />
                 <Route path="/submitQuiz/:quizId" element={<TakeQuizPage />} />
                 <Route path="/question-form" element={<QuestionForm />} />
