@@ -1,11 +1,10 @@
-/* 🌌 Global Styling - Cyberpunk Aesthetic */
+/* 🌌 Cyberpunk Aesthetic */
 body {
     font-family: 'Orbitron', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #0d0d0d;
     color: #00ffcc;
-    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 /* 🌓 Flip Mode */
@@ -27,20 +26,32 @@ header {
 
 /* 🎭 Cyberpunk Containers */
 .container, .quiz-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: rgba(0, 119, 255, 0.85);
+    background: linear-gradient(90deg, #00ffff, #0077ff);
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
     color: white;
     font-size: 18px;
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    margin: auto; /* ✅ Centers it horizontally */
+    margin-top: 50vh; /* ✅ Moves it halfway down the page */
+    transform: translateY(-50%); /* ✅ Ensures proper centering */
 }
 
-/* 🦾 Cyberpunk Buttons */
+/* ✅ Trivia Explosion Button BELOW the quiz, halfway down the page */
+.trivia-button-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 20px; /* ✅ Adds space below the quiz */
+}
 
-button:hover {
-    filter: brightness(1.4);
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 30px; /* ✅ Moves button further down */
 }
 
 /* 🔄 Flip Mode Button */
@@ -57,7 +68,6 @@ button:hover {
     cursor: pointer;
     font-weight: bold;
     box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
-    transition: all 0.3s ease-in-out;
 }
 
 #flipModeToggle:hover {
@@ -90,14 +100,6 @@ button:hover {
     text-shadow: 0px 0px 10px rgba(0, 255, 255, 1);
 }
 
-/* 🌌 Cyberpunk Neon Borders */
-input, textarea {
-    background: black;
-    color: white;
-    border: 2px solid #00ffff;
-    padding: 10px;
-}
-
 /* 🔥 Quiz Answer Buttons */
 .answers-container {
     display: flex;
@@ -106,6 +108,7 @@ input, textarea {
     flex-wrap: wrap;
     margin-top: 50px;
 }
+
 /* 🦾 Cyberpunk Buttons */
 .answer-button {
     background: linear-gradient(90deg, #00ffff, #0077ff);
@@ -116,16 +119,13 @@ input, textarea {
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    border-radius: 15px; /* 🔄 Rounded edges */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
+    border-radius: 15px;
 }
-/* ✨ Remove shadow entirely */
+
 .answer-button:hover {
     transform: scale(1.05);
 }
+
 /* 🎶 Glitch Effect */
 @keyframes glitch {
     0% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
@@ -136,64 +136,4 @@ input, textarea {
 h1 {
     font-size: 3rem;
     animation: glitch 0.5s infinite alternate;
-}
-
-@keyframes scrollLeft {
-    0% { transform: translateX(100vw); }
-    100% { transform: translateX(-100vw); }
-}
-
-@keyframes scrollRight {
-    0% { transform: translateX(-100vw); }
-    100% { transform: translateX(100vw); }
-}
-
-.scrolling-message-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-}
-
-.top-message .scrolling-message {
-    animation: scrollLeft 6s linear infinite;
-}
-
-.bottom-message .scrolling-message {
-    animation: scrollRight 6s linear infinite;
-}
-.button-container {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Ensures some space between button and text */
-}
-
-.toggle-text {
-    font-size: 16px;
-    cursor: pointer;
-    color: var(--text-color); /* Adjusts for Flip Mode */
-    text-decoration: underline;
-    transition: color 0.3s ease-in-out;
-}
-
-.toggle-text:hover {
-    color: rgba(255, 255, 255, 0.7);
-}
-.button-container {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Centers items horizontally */
-    margin-top: 20px;
-}
-
-.toggle-text {
-    font-size: 16px;
-    cursor: pointer;
-    color: var(--text-color);
-    text-decoration: underline;
-    transition: color 0.3s ease-in-out;
-    margin-top: 10px; /* Adds spacing */
-}
-
-.toggle-text:hover {
-    color: rgba(255, 255, 255, 0.7);
 }
