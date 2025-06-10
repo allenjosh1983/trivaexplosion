@@ -6,8 +6,9 @@ import '../App.css'; // Adjust the import path to correctly locate App.css
 function HomePage() {
     const [quiz, setQuiz] = useState('');
     const [options, setOptions] = useState([]);
-    const [result, setResult] = useState('');
+    const [correctAnswer, setCorrectAnswer] = useState('');
     const [loading, setLoading] = useState(true);
+    const [fade, setFade] = useState(false);
 
     const decodeEntities = (text) => {
         const parser = new DOMParser();
@@ -25,18 +26,43 @@ function HomePage() {
     const getQuiz = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://opentdb.com/api.php?amount=2&category=12&type=multiple');
-            const data = await response.json();
-            const questionData = data.results[0];
+            setFade(true);
 
-            setQuiz(decodeEntities(questionData.question));
+            let retries = 3;
+            let questionData;
 
-            const allOptions = [...new Set(shuffleArray(questionData.incorrect_answers.concat(questionData.correct_answer)))];
-            setOptions(allOptions);
+            while (retries > 0) {
+                const response = await fetch('https://opentdb.com/api.php?amount=2&category=12&type=multiple');
+                const data = await response.json();
+                questionData = data.results?.[0];
 
-            setLoading(false);
+                if (questionData?.question?.trim() && questionData?.correct_answer?.trim()) {
+                    break; // Exit loop when valid question is found
+                }
+
+                console.warn(`Retrying quiz fetch... attempts left: ${retries}`);
+                retries--;
+            }
+
+            if (!questionData) {
+                console.error("Failed to load valid quiz data after retries.");
+                setQuiz("Oops! Something went wrong. Try again.");
+                setOptions([]);
+                setLoading(false);
+                return;
+            }
+
+            setTimeout(() => {
+                setQuiz(decodeEntities(questionData.question));
+                setCorrectAnswer(decodeEntities(questionData.correct_answer));
+                setOptions(shuffleArray([...questionData.incorrect_answers, questionData.correct_answer]));
+                setLoading(false);
+                setFade(false);
+            }, 500);
         } catch (error) {
             console.log('Error fetching quiz:', error);
+            setQuiz("Oops! Network error. Try again!");
+            setOptions([]);
             setLoading(false);
         }
     }, []);
@@ -45,15 +71,19 @@ function HomePage() {
         getQuiz();
     }, [getQuiz]);
 
-    const handleGenerateQuiz = (event) => {
-        event.preventDefault();
-        getQuiz();
-        setResult('');
-    };
+   const handleAnswerClick = (event, selectedOption) => {
+       const button = event.target;
+
+       if (decodeEntities(selectedOption) === decodeEntities(correctAnswer)) {
+           button.classList.add('correct-reveal'); // ONLY applies when clicked
+       } else {
+           button.classList.add('shake');
+           setTimeout(() => button.classList.remove('shake'), 500);
+       }
+   };
 
     return (
         <div className="page-wrapper">
-            {/* ✅ Trivia Quiz Container */}
             <div className="container quiz-container">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
@@ -63,25 +93,19 @@ function HomePage() {
                                     <p>Loading...</p>
                                 ) : (
                                     <>
-                                        {/* 🔥 Question */}
-                                        {quiz && (
-                                            <div className="Question display-6">{quiz}</div>
-                                        )}
+                                        <div className={`Question display-6 ${fade ? "fade-out" : "fade-in"}`}>{quiz}</div>
 
-                                        {/* 🔄 Answer buttons */}
                                         <div className="answers-container">
-                                            {options.map((option, index) => (
-                                                <button key={index} className="answer-button">
-                                                    {decodeEntities(option)}
-                                                </button>
-                                            ))}
+                                            {options.length > 0 ? (
+                                                options.map((option, index) => (
+                                                    <button key={index} className="answer-button" onClick={(event) => handleAnswerClick(event, option)}>
+                                                        {decodeEntities(option)}
+                                                    </button>
+                                                ))
+                                            ) : (
+                                                <p style={{ color: "red" }}>No valid question loaded. Try again!</p>
+                                            )}
                                         </div>
-
-                                        {result && (
-                                            <div style={{ marginTop: '20px' }} className="Result alert alert-primary" role="alert">
-                                                <p>{result}</p>
-                                            </div>
-                                        )}
                                     </>
                                 )}
                             </div>
@@ -89,10 +113,8 @@ function HomePage() {
                     </div>
                 </div>
             </div>
-
-            {/* ✅ Trivia Explosion Button BELOW the container */}
             <div className="trivia-button-container">
-                <button className="btn btn-primary" onClick={handleGenerateQuiz}>
+                <button className="answer-button" onClick={getQuiz}>
                     Trivia Explosion!
                 </button>
             </div>

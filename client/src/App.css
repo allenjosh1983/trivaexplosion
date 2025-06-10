@@ -39,101 +39,109 @@ header {
     transform: translateY(-50%); /* ✅ Ensures proper centering */
 }
 
-/* ✅ Trivia Explosion Button BELOW the quiz, halfway down the page */
+/* ✅ Trivia Explosion Button BELOW the quiz */
 .trivia-button-container {
     display: flex;
     justify-content: center;
     position: relative;
-    margin-top: 20px; /* ✅ Adds space below the quiz */
-}
-
-.button-wrapper {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    margin-top: 30px; /* ✅ Moves button further down */
-}
-
-/* 🔄 Flip Mode Button */
-#flipModeToggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(90deg, #00ffff, #0077ff);
-    color: black;
-    padding: 10px 16px;
-    border-radius: 50px;
-    font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.8);
-}
-
-#flipModeToggle:hover {
-    filter: brightness(1.4);
-    box-shadow: 0px 0px 15px rgba(0, 255, 255, 1);
-}
-
-/* 🌐 Navbar */
-.nav-list {
-    list-style: none;
-    display: flex;
-    justify-content: flex-start;
-    gap: 20px;
-    padding: 12px;
-    margin: 0;
-    background: linear-gradient(90deg, #00ffff, #0077ff);
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
-}
-
-.nav-link {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: text-shadow 0.3s ease-in-out;
-}
-
-.nav-link:hover {
-    text-shadow: 0px 0px 10px rgba(0, 255, 255, 1);
-}
-
-/* 🔥 Quiz Answer Buttons */
-.answers-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 /* 🦾 Cyberpunk Buttons */
-.answer-button {
+.answer-button, .trivia-button-container button {
     background: linear-gradient(90deg, #00ffff, #0077ff);
-    color: black;
+    color: white !important; /* ✅ Ensures uniform text color */
     font-size: 18px;
     font-weight: bold;
     padding: 12px 20px;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     border-radius: 15px;
+    position: relative;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8); /* ✅ Matches Flip Mode button */
 }
 
+/* ✅ Uniform Hover Glow */
+.answer-button:hover, .trivia-button-container button:hover {
+    filter: brightness(1.4);
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 1); /* ✅ Matches Flip Mode button */
+}
+
+/* 🔄 Answer Button Hover */
 .answer-button:hover {
     transform: scale(1.05);
 }
 
-/* 🎶 Glitch Effect */
-@keyframes glitch {
-    0% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
-    50% { text-shadow: -2px -2px 5px #00ffff, 2px 2px 5px #0077ff; }
-    100% { text-shadow: 2px 2px 5px #00ffff, -2px -2px 5px #0077ff; }
+/* 🎭 Correct Answer Reveal Behind Button */
+@keyframes fadeSweepGreen {
+    0% { background: linear-gradient(90deg, #00ffff, #0077ff); }
+    25% { background: linear-gradient(90deg, #00ddff, #0077dd); }
+    50% { background: linear-gradient(90deg, #00bbff, #0077bb); }
+    75% { background: linear-gradient(90deg, #00ff77, #00aa77); }
+    100% { background: linear-gradient(90deg, #00ff00, #00cc00); }
 }
 
-h1 {
-    font-size: 3rem;
-    animation: glitch 0.5s infinite alternate;
+.answer-button.correct-reveal {
+    animation: fadeSweepGreen 3s ease-in-out forwards; /* ✅ Slower and smoother transition */
+    color: white !important; /* ✅ Keeps text white */
+    font-weight: bold;
+    box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.8);
+}
+
+/* 🔥 Shake Effect for Incorrect Answers */
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* ✅ Smooth Fade Effects */
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.6s ease-in;
+}
+
+/* 🛰️ Flip Mode Button - Restored Bottom Right */
+#flipModeToggle {
+    position: fixed !important; /* ✅ Keeps it anchored */
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #00ffff, #0077ff);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px rgba(0, 255, 255, 0.8);
+    transition: all 0.3s ease-in-out;
+    z-index: 999; /* ✅ Ensures visibility */
+}
+
+/* 🚀 Add Futuristic Glow Effect */
+#flipModeToggle:hover {
+    filter: brightness(1.4);
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 1);
+}
+
+/* 🛠️ Answer Button Spacing Fix */
+.answers-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* ✅ Increased spacing between buttons */
+    flex-wrap: wrap;
+    margin-top: 50px;
 }
